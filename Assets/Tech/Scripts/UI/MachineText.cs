@@ -29,6 +29,8 @@ public class MachineText : MonoBehaviour
             totalText += c;
             myText.text = totalText;
         }
+        await Awaitable.WaitForSecondsAsync(1.0f);
+        myText.text = "";
         IsTyping = false;
     }
 }
