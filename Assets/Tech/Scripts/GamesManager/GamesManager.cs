@@ -9,8 +9,10 @@ public class GamesManager : StateMachine
         Instance = this;
     }
     #endregion
-    private void Start()
+
+    [SerializeField] MachineText DialogueMachineText;
+    public void DisplayText(string someText)
     {
-        
+        DialogueMachineText.DisplayText(someText);
     }
 }

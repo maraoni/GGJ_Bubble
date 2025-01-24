@@ -9,6 +9,7 @@ public class Guest : MonoBehaviour
     {
         WaitingForDrink,
         WaitingForFill,
+        PassingMoney,
         GivingMoney,
         Satisfied
     }
@@ -26,6 +27,9 @@ public class Guest : MonoBehaviour
     [SerializeField] Glass myGlass;
     [SerializeField] Money myMoney;
 
+    [SerializeField] string WantText;
+    [SerializeField] string ThanksText;
+
     private void Start()
     {
         state = GuestState.WaitingForDrink;
@@ -34,26 +38,33 @@ public class Guest : MonoBehaviour
         myMoney.gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
 
+    void CheckOutside()
+    {
         if (PlayerTransform)
         {
             if (Vector3.Distance(transform.position, PlayerTransform.position) > BoredDistance)
             {
+                myGlass.gameObject.SetActive(true);
+                myMoney.gameObject.SetActive(false);
                 state = GuestState.WaitingForDrink;
             }
         }
+    }
+    private void Update()
+    {
+
+        
 
         switch (state)
         {
             case GuestState.WaitingForDrink:
-
+                CheckOutside();
                 Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
 
                 break;
             case GuestState.WaitingForFill:
-
+                CheckOutside();
                 Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandFillPoint.transform.position, 10 * Time.deltaTime);
 
                 if (myGlass.IsSatisfied)
@@ -62,12 +73,16 @@ public class Guest : MonoBehaviour
                 }
 
                 break;
+            case GuestState.PassingMoney:
+                
+                break;
             case GuestState.GivingMoney:
-                Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
+                //Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
 
-                if(myMoney.gameObject.activeSelf)
+                if(!myMoney.gameObject.activeSelf)
                 {
                     state = GuestState.Satisfied;
+
                 }
 
                 break;
@@ -81,21 +96,27 @@ public class Guest : MonoBehaviour
 
     IEnumerator GiveMoney()
     {
+        state = GuestState.PassingMoney;
+        GamesManager.Instance.DisplayText(ThanksText);
+
+        const float MaxTime = 1.5f;
+
+        for (float i = 0; i < MaxTime; i += Time.deltaTime) 
+        {
+            Hand.transform.position = Vector3.Lerp(HandFillPoint.transform.position, HandDefault.transform.position, i / MaxTime);
+            yield return null;
+        }
+
         myGlass.gameObject.SetActive(false);
         myMoney.gameObject.SetActive(true);
+
+        for (float i = 0; i < MaxTime; i += Time.deltaTime)
+        {
+            Hand.transform.position = Vector3.Lerp(HandDefault.transform.position, HandFillPoint.transform.position, i / MaxTime);
+            yield return null;
+        }
+
         state = GuestState.GivingMoney;
-
-        for (float i = 0; i < 1.5f; i += Time.deltaTime) 
-        {
-            Hand.transform.position = Vector3.Lerp(HandFillPoint.transform.position, HandDefault.transform.position, i / 1.5f);
-            yield return null;
-        }
-
-        for (float i = 0; i < 1.5f; i += Time.deltaTime)
-        {
-            Hand.transform.position = Vector3.Lerp(HandDefault.transform.position, HandFillPoint.transform.position, 10 * Time.deltaTime);
-            yield return null;
-        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -105,6 +126,7 @@ public class Guest : MonoBehaviour
             PlayerTransform = other.transform;
             if (state == GuestState.WaitingForDrink)
             {
+                GamesManager.Instance.DisplayText(WantText);
                 state = GuestState.WaitingForFill;
             }
         }
