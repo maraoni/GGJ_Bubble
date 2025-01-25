@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
@@ -7,16 +8,26 @@ public class StateMachine : MonoBehaviour
     public State CurrentState;
     public void InitializeStateMachine()
     {
-        State[] states = FindObjectsByType<State>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        State[] st = FindObjectsByType<State>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        states = st.ToList();
+
+        SwitchState<Playing>();
     }
     public virtual void SwitchState<T>() where T : State
     {
-        foreach(var state in states)
+        foreach(State state in states)
         {
             if(state is T)
             {
+                CurrentState?.OnExit();
                 CurrentState = state;
+                CurrentState.OnEnter();
             }
         }
+    }
+
+    private void Update()
+    {
+        CurrentState?.OnUpdate();
     }
 }

@@ -30,6 +30,8 @@ public class Guest : MonoBehaviour
     [SerializeField] string WantText;
     [SerializeField] string ThanksText;
 
+    public bool IsSatisfied => state == GuestState.Satisfied;
+
     private void Start()
     {
         state = GuestState.WaitingForDrink;
