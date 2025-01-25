@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8594da02a71f57f4f96b0e3fd3e1bd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GuestPoints: []
+  mainCamera: {fileID: 0}
+  Guest: {fileID: 0}
+  GuestSpawn: {fileID: 0}
 --- !u!1 &4465366152350444627
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944b2dd7f8000c4ea79c8d638930b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  controller: {fileID: 0}
 --- !u!1 &7150861088340333702
 GameObject:
   m_ObjectHideFlags: 0

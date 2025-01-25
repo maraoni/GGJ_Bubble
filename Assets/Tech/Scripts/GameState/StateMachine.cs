@@ -11,7 +11,6 @@ public class StateMachine : MonoBehaviour
         State[] st = FindObjectsByType<State>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         states = st.ToList();
 
-        SwitchState<Playing>();
     }
     public virtual void SwitchState<T>() where T : State
     {
