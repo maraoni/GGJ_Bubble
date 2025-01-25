@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     {
         state = CameraState.FollowPlayer;
     }
-    private void LateUpdate()
+    public void UpdateCamera()
     {
         switch (state)
         {

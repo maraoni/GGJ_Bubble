@@ -18,8 +18,8 @@ public class GamesManager : StateMachine
 
         SwitchState<MainMenu>();
     }
-    public void DisplayText(string someText)
+    public void DisplayText(string someText, bool ShouldDissapear)
     {
-        DialogueMachineText.DisplayText(someText);
+        DialogueMachineText.DisplayText(someText, ShouldDissapear);
     }
 }

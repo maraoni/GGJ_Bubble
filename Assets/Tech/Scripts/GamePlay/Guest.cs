@@ -4,9 +4,10 @@ using UnityEngine;
 public class Guest : MonoBehaviour
 {
 
-    const float BoredDistance = 15.0f;
+    const float BoredDistance = 22.0f;
     public enum GuestState
     {
+        Idle,
         WaitingForDrink,
         WaitingForFill,
         PassingMoney,
@@ -15,12 +16,6 @@ public class Guest : MonoBehaviour
     }
 
     public GuestState state;
-
-
-    public Transform Hand;
-
-    public Transform HandDefault;
-    public Transform HandFillPoint;
 
     Transform PlayerTransform;
 
@@ -32,16 +27,26 @@ public class Guest : MonoBehaviour
     [SerializeField] string WantText;
     [SerializeField] string ThanksText;
 
+    [SerializeField] Animator myAnim;
+
     public bool IsSatisfied => state == GuestState.Satisfied;
+
+    float WantDrinkTime;
 
     private void Start()
     {
-        state = GuestState.WaitingForDrink;
-
-        myGlass.gameObject.SetActive(true);
-        myMoney.gameObject.SetActive(false);
+        InitializeGuest();
     }
 
+    public void InitializeGuest()
+    {
+        WantDrinkTime = Random.Range(3.0f, 6.0f);
+
+        state = GuestState.Idle;
+
+        myGlass.gameObject.SetActive(false);
+        myMoney.gameObject.SetActive(false);
+    }
 
     void CheckOutside()
     {
@@ -49,28 +54,42 @@ public class Guest : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, PlayerTransform.position) > BoredDistance)
             {
-                myGlass.gameObject.SetActive(true);
+                myGlass.gameObject.SetActive(false);
                 myMoney.gameObject.SetActive(false);
                 state = GuestState.WaitingForDrink;
                 CameraController.Instance.ClearIfSame(myFocusPoint);
+                if (state != GuestState.GivingMoney && state != GuestState.Satisfied)
+                {
+                    myAnim.SetTrigger("WantDrink");
+                }
             }
         }
     }
-    private void Update()
+    public void UpdateGuest()
     {
-
 
 
         switch (state)
         {
+            case GuestState.Idle:
+                if (WantDrinkTime <= 0)
+                {
+                    state = GuestState.WaitingForDrink;
+                    myAnim.SetTrigger("WantDrink");
+                }
+                else
+                {
+                    WantDrinkTime -= Time.deltaTime;
+                }
+                break;
             case GuestState.WaitingForDrink:
                 CheckOutside();
-                Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
+                //Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
 
                 break;
             case GuestState.WaitingForFill:
                 CheckOutside();
-                Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandFillPoint.transform.position, 10 * Time.deltaTime);
+                //Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandFillPoint.transform.position, 10 * Time.deltaTime);
 
                 if (myGlass.IsSatisfied)
                 {
@@ -87,13 +106,16 @@ public class Guest : MonoBehaviour
                 if (!myMoney.gameObject.activeSelf)
                 {
                     state = GuestState.Satisfied;
+                    myMoney.gameObject.SetActive(false);
+                    myAnim.SetTrigger("Satisfied");
+
                     CameraController.Instance.ClearIfSame(myFocusPoint);
                 }
 
                 break;
             case GuestState.Satisfied:
 
-                Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
+                //Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
                 break;
         }
     }
@@ -101,25 +123,12 @@ public class Guest : MonoBehaviour
     IEnumerator GiveMoney()
     {
         state = GuestState.PassingMoney;
-        GamesManager.Instance.DisplayText(ThanksText);
-
-        const float MaxTime = 1.5f;
-
-        for (float i = 0; i < MaxTime; i += Time.deltaTime)
-        {
-            Hand.transform.position = Vector3.Lerp(HandFillPoint.transform.position, HandDefault.transform.position, i / MaxTime);
-            yield return null;
-        }
-
         myGlass.gameObject.SetActive(false);
         myMoney.gameObject.SetActive(true);
-
-        for (float i = 0; i < MaxTime; i += Time.deltaTime)
-        {
-            Hand.transform.position = Vector3.Lerp(HandDefault.transform.position, HandFillPoint.transform.position, i / MaxTime);
-            yield return null;
-        }
-
+        myAnim.SetTrigger("PresentMoney");
+        GamesManager.Instance.DisplayText(ThanksText, true);
+        yield return new WaitForSeconds(2);
+        myAnim.SetTrigger("WavingMoney");
         state = GuestState.GivingMoney;
     }
 
@@ -127,13 +136,18 @@ public class Guest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
-            CameraController.Instance.SetFocusPoint(myFocusPoint);
-            PlayerTransform = other.transform;
-            if (state == GuestState.WaitingForDrink)
+            if (WantDrinkTime <= 0)
             {
-                GamesManager.Instance.DisplayText(WantText);
-                state = GuestState.WaitingForFill;
+
+                PlayerTransform = other.transform;
+                if (state == GuestState.WaitingForDrink)
+                {
+                    CameraController.Instance.SetFocusPoint(myFocusPoint);
+                    GamesManager.Instance.DisplayText(WantText, false);
+                    state = GuestState.WaitingForFill;
+                    myGlass.gameObject.SetActive(true);
+                    myAnim.SetTrigger("PresentGlass");
+                }
             }
         }
     }

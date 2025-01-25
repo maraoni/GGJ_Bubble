@@ -11,15 +11,15 @@ public class MachineText : MonoBehaviour
     [ContextMenu("Display DebugText")]
     public void DisplayText()
     {
-        _ = ShowText(DebugText);
+        _ = ShowText(DebugText, true);
     }
 
-    public void DisplayText(string someText)
+    public void DisplayText(string someText, bool shouldDissapear)
     {
-        _ = ShowText(someText);
+        _ = ShowText(someText, shouldDissapear);
     }
 
-    private async Awaitable ShowText(string someText)
+    private async Awaitable ShowText(string someText, bool shouldDissaper)
     {
         IsTyping = true;
         string totalText = "";
@@ -29,8 +29,12 @@ public class MachineText : MonoBehaviour
             totalText += c;
             myText.text = totalText;
         }
-        await Awaitable.WaitForSecondsAsync(1.0f);
-        myText.text = "";
+
+        if (shouldDissaper)
+        {
+            await Awaitable.WaitForSecondsAsync(1.0f);
+            myText.text = "";
+        }
         IsTyping = false;
     }
 }

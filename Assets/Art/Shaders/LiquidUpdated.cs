@@ -42,6 +42,12 @@ public class LiquidUpdated : MonoBehaviour {
 		GetMeshAndRend();
 	}
 
+	public void SetFill(float aFill)
+	{
+		fillAmount = aFill;
+
+    }
+
 	private void OnValidate() {
 		GetMeshAndRend();
 	}
