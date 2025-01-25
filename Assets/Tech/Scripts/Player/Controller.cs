@@ -3,22 +3,17 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     [SerializeField] float MovementSpeed;
+    [SerializeField] float WalkThreshold;
     Rigidbody controller;
 
-    [SerializeField] Transform HandPointRight;
-    [SerializeField] Transform HandPointLeft;
+    [SerializeField] Animator animator;
 
-    [SerializeField] Transform HandRight;
-    [SerializeField] Transform HandLeft;
     private void Start()
     {
         controller = GetComponent<Rigidbody>();
     }
     public void UpdatePlayer()
     {
-        HandRight.up = (HandPointRight.position - HandRight.position).normalized;
-        HandLeft.up = (HandPointLeft.position - HandLeft.position).normalized;
-
         float x, y;
 
         x = Input.GetAxis("Horizontal");
@@ -36,6 +31,26 @@ public class Controller : MonoBehaviour
         finalVelocity = Vector3.ClampMagnitude(finalVelocity, 1);
 
         controller.linearVelocity = finalVelocity * MovementSpeed;
+
+
+        float xSpeed = Vector3.Dot(finalVelocity, rightDir);
+        float YSpeed = Vector3.Dot(finalVelocity, forwardDir);
+
+        //Vector3 relativeVelocity = transform.InverseTransformPoint(finalVelocity);
+
+        animator.SetFloat("X", xSpeed);
+        animator.SetFloat("Y", YSpeed);
+
+
+        if (finalVelocity.magnitude > WalkThreshold)
+        {
+            animator.SetBool("Moving", true);
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+        }
+
         //controller.(finalVelocity * MovementSpeed * Time.deltaTime);
     }
 }
