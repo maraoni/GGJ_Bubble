@@ -15,6 +15,8 @@ public class GamesManager : StateMachine
     private void Start()
     {
         InitializeStateMachine();
+
+        SwitchState<MainMenu>();
     }
     public void DisplayText(string someText)
     {
