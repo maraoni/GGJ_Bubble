@@ -62,7 +62,7 @@ Material:
     - _QueueOffset: 0
     - _Shadow_Steps: 2
     m_Colors:
-    - _Light: {r: 0.84313726, g: 0.72898275, b: 0.19999997, a: 0}
+    - _Light: {r: 0.90188676, g: 0.7667402, b: 0.4203132, a: 0}
     - _Mid: {r: 1, g: 0.7003509, b: 0, a: 1}
     - _Shadow: {r: 0.28235295, g: 0.1924456, b: 0.3882353, a: 1}
   m_BuildTextureStacks: []
