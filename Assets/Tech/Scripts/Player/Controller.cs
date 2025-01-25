@@ -4,12 +4,21 @@ public class Controller : MonoBehaviour
 {
     [SerializeField] float MovementSpeed;
     Rigidbody controller;
+
+    [SerializeField] Transform HandPointRight;
+    [SerializeField] Transform HandPointLeft;
+
+    [SerializeField] Transform HandRight;
+    [SerializeField] Transform HandLeft;
     private void Start()
     {
         controller = GetComponent<Rigidbody>();
     }
     public void UpdatePlayer()
     {
+        HandRight.up = (HandPointRight.position - HandRight.position).normalized;
+        HandLeft.up = (HandPointLeft.position - HandLeft.position).normalized;
+
         float x, y;
 
         x = Input.GetAxis("Horizontal");
