@@ -14,15 +14,6 @@ public class Glass : MonoBehaviour
         renderers = GetComponentsInChildren<MeshRenderer>();
         startColor = renderers[0].material.color;
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Champagne"))
-        {
-            Debug.Log("Filled the glass some");
-        }
-    }
-
     private void Update()
     {
         foreach(MeshRenderer r in renderers)
@@ -33,6 +24,5 @@ public class Glass : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         FillAmount += Time.deltaTime * 0.5f;
-        Debug.Log("Bruh");
     }
 }

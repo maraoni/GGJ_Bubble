@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
     {
         controller = GetComponent<Rigidbody>();
     }
-    void Update()
+    public void UpdatePlayer()
     {
         float x, y;
 

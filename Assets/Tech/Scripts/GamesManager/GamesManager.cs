@@ -11,6 +11,11 @@ public class GamesManager : StateMachine
     #endregion
 
     [SerializeField] MachineText DialogueMachineText;
+
+    private void Start()
+    {
+        InitializeStateMachine();
+    }
     public void DisplayText(string someText)
     {
         DialogueMachineText.DisplayText(someText);
