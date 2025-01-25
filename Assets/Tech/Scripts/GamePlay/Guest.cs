@@ -27,6 +27,8 @@ public class Guest : MonoBehaviour
     [SerializeField] Glass myGlass;
     [SerializeField] Money myMoney;
 
+    [SerializeField] Transform myFocusPoint;
+
     [SerializeField] string WantText;
     [SerializeField] string ThanksText;
 
@@ -50,13 +52,14 @@ public class Guest : MonoBehaviour
                 myGlass.gameObject.SetActive(true);
                 myMoney.gameObject.SetActive(false);
                 state = GuestState.WaitingForDrink;
+                CameraController.Instance.ClearIfSame(myFocusPoint);
             }
         }
     }
     private void Update()
     {
 
-        
+
 
         switch (state)
         {
@@ -76,22 +79,21 @@ public class Guest : MonoBehaviour
 
                 break;
             case GuestState.PassingMoney:
-                
+
                 break;
             case GuestState.GivingMoney:
                 //Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
 
-                if(!myMoney.gameObject.activeSelf)
+                if (!myMoney.gameObject.activeSelf)
                 {
                     state = GuestState.Satisfied;
-
+                    CameraController.Instance.ClearIfSame(myFocusPoint);
                 }
 
                 break;
             case GuestState.Satisfied:
 
                 Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandDefault.transform.position, 10 * Time.deltaTime);
-
                 break;
         }
     }
@@ -103,7 +105,7 @@ public class Guest : MonoBehaviour
 
         const float MaxTime = 1.5f;
 
-        for (float i = 0; i < MaxTime; i += Time.deltaTime) 
+        for (float i = 0; i < MaxTime; i += Time.deltaTime)
         {
             Hand.transform.position = Vector3.Lerp(HandFillPoint.transform.position, HandDefault.transform.position, i / MaxTime);
             yield return null;
@@ -125,6 +127,8 @@ public class Guest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+
+            CameraController.Instance.SetFocusPoint(myFocusPoint);
             PlayerTransform = other.transform;
             if (state == GuestState.WaitingForDrink)
             {
