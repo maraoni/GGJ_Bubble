@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,24 +10,45 @@ public class Playing : State
     List<Guest> guests = new();
 
     [SerializeField] Controller controller;
+    [SerializeField] GameObject playingUI;
+
+    Vector3 SpawnPosition;
+
+    private void Awake()
+    {
+        SpawnPosition = controller.transform.position;
+    }
     public override void OnEnter()
     {
         base.OnEnter();
-        Guest[] st = FindObjectsByType<Guest>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        CameraController.Instance.ClearFocusPoint();
+
+
+        playingUI?.SetActive(true);
+        mainCamera.SetActive(true);
+        Guest[] st = FindObjectsByType<Guest>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         guests.Clear();
         guests = st.ToList();
-        mainCamera.SetActive(true);
+
+        foreach (Guest gue in st)
+        {
+            gue.InitializeGuest();
+        }
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
+
+        CameraController.Instance.UpdateCamera();
         controller.UpdatePlayer();
 
         bool allAreSatisfied = true;
+
         foreach (Guest g in guests)
         {
+            g.UpdateGuest();
             if(!g.IsSatisfied)
             {
                 allAreSatisfied = false;
@@ -39,9 +61,21 @@ public class Playing : State
         }
     }
 
+    public void PlayCorkAnimation()
+    {
+        controller.PopCork();
+    }
+
+    public void ResetPlayerPosition()
+    {
+        controller.ResetBottle();
+        controller.transform.position = SpawnPosition;
+    }
+
     public override void OnExit()
     {
         base.OnExit();
         mainCamera.SetActive(false);
+        playingUI.SetActive(false);
     }
 }

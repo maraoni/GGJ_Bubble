@@ -15,6 +15,10 @@ public class MainMenu : State
         MainMenuCamera.SetActive(true);
 
         TransitionImage.color = Color.clear;
+        CustommersEnter s = GamesManager.Instance.GetState<CustommersEnter>() as CustommersEnter;
+
+        s.ResetGame();
+
         base.OnEnter();
     }
 
@@ -37,6 +41,7 @@ public class MainMenu : State
     {
         if (!hasStarted)
         {
+            hasStarted = true;
             StartCoroutine(StartingGame());
         }
     }

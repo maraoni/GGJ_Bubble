@@ -5,7 +5,7 @@ public class Intro : State
     public override void OnEnter()
     {
         base.OnEnter();
-        GamesManager.Instance.SwitchState<Playing>();
+        GamesManager.Instance.SwitchState<CustommersEnter>();
     }
 
     public override void OnUpdate()

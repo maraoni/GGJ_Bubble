@@ -57,8 +57,8 @@ Material:
     - _Fresnel_Amount: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WobbleX: -1.1809591e-13
-    - _WobbleZ: -5.0489347e-14
+    - _WobbleX: -0.000053142983
+    - _WobbleZ: 0.000053142983
     m_Colors:
     - _FresnelColor: {r: 0.18330365, g: 0.3584906, b: 0.21954922, a: 1}
     - _SideColor: {r: 0.28504804, g: 0.3207547, b: 0.29544365, a: 1}

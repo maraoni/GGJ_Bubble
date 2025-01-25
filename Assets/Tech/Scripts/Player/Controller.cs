@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
@@ -8,12 +9,30 @@ public class Controller : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    [SerializeField] GameObject Cork;
+    [SerializeField] GameObject ChampagneEffect;
+
+    public float MaxChampagneFill;
+    [SerializeField] float CurrentChampagneFill;
+
+    [SerializeField] LiquidUpdated myBottle;
+
     private void Start()
     {
         controller = GetComponent<Rigidbody>();
     }
     public void UpdatePlayer()
     {
+        float fill = Mathf.Lerp(1, 0, CurrentChampagneFill / MaxChampagneFill);
+        myBottle.SetFill(fill);
+
+        CurrentChampagneFill -= Time.deltaTime;
+
+        if(CurrentChampagneFill <= 0)
+        {
+            GamesManager.Instance.SwitchState<LoseState>();
+        }
+
         float x, y;
 
         x = Input.GetAxis("Horizontal");
@@ -52,5 +71,28 @@ public class Controller : MonoBehaviour
         }
 
         //controller.(finalVelocity * MovementSpeed * Time.deltaTime);
+    }
+
+    public void PopCork()
+    {
+        StartCoroutine(PopTheCork());
+    }
+
+    public void ResetBottle()
+    {
+        CurrentChampagneFill = MaxChampagneFill;
+        Cork.SetActive(true);
+        ChampagneEffect.SetActive(false);
+    }
+
+    public IEnumerator PopTheCork()
+    {
+        Cork.SetActive(true);
+        ChampagneEffect.SetActive(false);
+        yield return new WaitForSeconds(1);
+
+        Cork.SetActive(false);
+        ChampagneEffect.SetActive(true);
+
     }
 }

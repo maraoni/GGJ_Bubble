@@ -1,63 +1,95 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CustommersEnter : State
 {
-    [SerializeField] List<Transform> GuestPoints;
+    [SerializeField] List<GameObject> Levels = new();
+    [SerializeField] List<string> LevelDescriptions = new();
     [SerializeField] GameObject mainCamera;
 
     [SerializeField] GameObject Guest;
     [SerializeField] Transform GuestSpawn;
+
+    [SerializeField] GameObject NextStageButton;
+    [SerializeField] GameObject CustommersEnterUI;
+
+    [SerializeField] Image TransitionImage;
+    [SerializeField] MachineText LevelDescriptionText;
+    int CurrentLevel = 0;
+
+    public void ResetGame()
+    {
+        CurrentLevel = 0;
+    }
     public override void OnEnter()
     {
         base.OnEnter();
+        
+
+        if (CurrentLevel + 1 > Levels.Count)
+        {
+            GamesManager.Instance.SwitchState<MainMenu>();
+            return;
+        }
+
+        TransitionImage.color = Color.clear;
         mainCamera.SetActive(true);
-        StartCoroutine(SpawnGuests());
+        NextStageButton.SetActive(false);
+        CustommersEnterUI.SetActive(true);
+
+        StartCoroutine(NextStage());
+    }
+    public IEnumerator NextStage()
+    {
+        LevelDescriptionText.gameObject.SetActive(true);
+        LevelDescriptionText.DisplayText(LevelDescriptions[CurrentLevel], false);
+
+        for (float t = 0; t < 1; t += Time.deltaTime)
+        {
+            TransitionImage.color = Color.Lerp(Color.clear, Color.black, t);
+        }
+
+        TransitionImage.color = Color.black;
+
+        yield return new WaitForSeconds(3);
+        NextStageButton.SetActive(true);
     }
 
-    public IEnumerator SpawnGuests()
+    public void SpawnNextLevel()
     {
-        yield return new WaitForSeconds(2);
-
-        const float GuestTime = 0.5f;
-
-
-        for (int i = 0; i < 3; i++)
+        NextStageButton.SetActive(false);
+        foreach(GameObject g in Levels)
         {
-            if (GuestPoints.Count == 0)
-            {
-                break;
-            }
-            yield return new WaitForSeconds(GuestTime);
+            g.SetActive(false);
+        }
+        Levels[CurrentLevel].SetActive(true);
+        StartCoroutine(StartNextStage());
+    }
 
-            int rndGuestPoint = Random.Range(0, GuestPoints.Count);
-            GameObject guest = Instantiate(Guest, GuestSpawn.position, GuestPoints[rndGuestPoint].transform.rotation);
+    public IEnumerator StartNextStage()
+    {
 
-            Vector3 Point = GuestPoints[rndGuestPoint].transform.position;
-            StartCoroutine(WalkGuestToPoint(guest.transform, Point));
+        LevelDescriptionText.gameObject.SetActive(false);
 
-            Destroy(GuestPoints[rndGuestPoint].gameObject);
-            GuestPoints.RemoveAt(rndGuestPoint);
+        Playing s = GamesManager.Instance.GetState<Playing>() as Playing;
+        s.ResetPlayerPosition();
 
+        for (float t = 0; t < 1; t += Time.deltaTime)
+        {
+            TransitionImage.color = Color.Lerp(Color.black, Color.clear, t);
             yield return null;
         }
 
-        yield return new WaitForSeconds(2);
+        s.PlayCorkAnimation();
+
+        yield return new WaitForSeconds(2.0f);
+        TransitionImage.color = Color.clear;
+        CurrentLevel++;
         GamesManager.Instance.SwitchState<Playing>();
     }
 
-    public IEnumerator WalkGuestToPoint(Transform aGuest, Vector3 aPoint)
-    {
-        const float WalkTime = 0.5f;
-        Vector3 startPos = aGuest.transform.position;
-        for (float t = 0; t < WalkTime; t += Time.deltaTime)
-        {
-            aGuest.transform.position = Vector3.Lerp(startPos, aPoint, t / WalkTime);
-
-            yield return null;
-        }
-    }
 
     public override void OnUpdate()
     {
@@ -67,6 +99,12 @@ public class CustommersEnter : State
     public override void OnExit()
     {
         base.OnExit();
+
         mainCamera.SetActive(false);
+
+        TransitionImage.color = Color.clear;
+        NextStageButton.SetActive(false);
+        CustommersEnterUI.SetActive(false);
+
     }
 }

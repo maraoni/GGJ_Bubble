@@ -25,6 +25,18 @@ public class StateMachine : MonoBehaviour
         }
     }
 
+    public State GetState<T>() where T : State
+    {
+        foreach (State state in states)
+        {
+            if (state is T)
+            {
+                return state;
+            }
+        }
+        return null;
+    }
+
     private void Update()
     {
         CurrentState?.OnUpdate();

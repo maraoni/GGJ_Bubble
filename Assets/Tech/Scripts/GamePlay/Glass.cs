@@ -9,6 +9,7 @@ public class Glass : MonoBehaviour
     public bool IsSatisfied => FillAmount > 1;
 
     Color startColor = Color.white;
+    [SerializeField] LiquidUpdated myLiquidUpdated;
     private void Start()
     {
         renderers = GetComponentsInChildren<MeshRenderer>();
@@ -16,13 +17,11 @@ public class Glass : MonoBehaviour
     }
     private void Update()
     {
-        foreach(MeshRenderer r in renderers)
-        {
-            r.material.color = Color.Lerp(startColor, Color.yellow, FillAmount);
-        }
+        float fill = Mathf.Lerp(1, 0, FillAmount);
+        myLiquidUpdated.SetFill(fill);
     }
     private void OnParticleCollision(GameObject other)
     {
-        FillAmount += Time.deltaTime * 0.5f;
+        FillAmount += Time.deltaTime * 0.35f;
     }
 }
