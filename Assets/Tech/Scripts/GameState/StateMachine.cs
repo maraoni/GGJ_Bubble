@@ -41,4 +41,8 @@ public class StateMachine : MonoBehaviour
     {
         CurrentState?.OnUpdate();
     }
+    private void LateUpdate()
+    {
+        CurrentState?.OnLateUpdate();
+    }
 }

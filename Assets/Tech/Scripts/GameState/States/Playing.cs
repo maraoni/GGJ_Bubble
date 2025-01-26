@@ -46,7 +46,7 @@ public class Playing : State
             return;
         }
 
-        CameraController.Instance.UpdateCamera();
+
         controller.UpdatePlayer();
 
         bool allAreSatisfied = true;
@@ -64,6 +64,11 @@ public class Playing : State
         {
             GamesManager.Instance.SwitchState<CustommersEnter>();
         }
+    }
+    public override void OnLateUpdate()
+    {
+        base.OnLateUpdate();
+        CameraController.Instance.UpdateCamera();
     }
 
     public void PlayCorkAnimation()

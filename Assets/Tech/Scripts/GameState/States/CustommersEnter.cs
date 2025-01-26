@@ -70,7 +70,6 @@ public class CustommersEnter : State
 
     public IEnumerator StartNextStage()
     {
-
         LevelDescriptionText.gameObject.SetActive(false);
 
         Playing s = GamesManager.Instance.GetState<Playing>() as Playing;
