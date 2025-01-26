@@ -30,7 +30,7 @@ public class CustommersEnter : State
 
         if (CurrentLevel + 1 > Levels.Count)
         {
-            GamesManager.Instance.SwitchState<MainMenu>();
+            GamesManager.Instance.SwitchState<Outro>();
             return;
         }
 

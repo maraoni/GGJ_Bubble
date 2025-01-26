@@ -1570,6 +1570,7 @@ MonoBehaviour:
   MainMenuButton: {fileID: 4736629893014158725}
   LoseText: You wasted too much bubbly...
   LoseMachineText: {fileID: 3120526158474123324}
+  LoseCamera: {fileID: 0}
 --- !u!1 &7579801427761751495
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Playing : State
 {
-    [SerializeField] GameObject mainCamera;
+    public GameObject mainCamera;
 
     List<Guest> guests = new();
 
@@ -40,6 +40,11 @@ public class Playing : State
     {
         base.OnUpdate();
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GamesManager.Instance.SwitchState<Outro>();
+            return;
+        }
 
         CameraController.Instance.UpdateCamera();
         controller.UpdatePlayer();

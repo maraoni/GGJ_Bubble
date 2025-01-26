@@ -15,6 +15,12 @@ public class Glass : MonoBehaviour
         renderers = GetComponentsInChildren<MeshRenderer>();
         startColor = renderers[0].material.color;
     }
+
+    public void Initialize()
+    {
+        FillAmount = 0;
+    }
+
     private void Update()
     {
         float fill = Mathf.Lerp(1, 0, FillAmount);

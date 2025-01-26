@@ -44,6 +44,8 @@ public class Guest : MonoBehaviour
 
         state = GuestState.Idle;
 
+        myGlass.Initialize();
+
         myGlass.gameObject.SetActive(false);
         myMoney.gameObject.SetActive(false);
     }

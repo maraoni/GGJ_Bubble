@@ -33,14 +33,15 @@ public class Controller : MonoBehaviour
             GamesManager.Instance.SwitchState<LoseState>();
         }
 
+        Playing s = GamesManager.Instance.GetState<Playing>() as Playing; 
         float x, y;
 
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
 
         Vector3 finalVelocity = new();
-        Vector3 rightDir = Camera.main.transform.right;
-        Vector3 forwardDir = Camera.main.transform.forward;
+        Vector3 rightDir = s.mainCamera.transform.right;
+        Vector3 forwardDir = s.mainCamera.transform.forward;
         forwardDir.y = 0;
         forwardDir.Normalize();
 
@@ -80,6 +81,7 @@ public class Controller : MonoBehaviour
 
     public void ResetBottle()
     {
+        myBottle.SetFill(0);
         CurrentChampagneFill = MaxChampagneFill;
         Cork.SetActive(true);
         ChampagneEffect.SetActive(false);
