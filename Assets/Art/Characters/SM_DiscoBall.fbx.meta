@@ -3,7 +3,17 @@ guid: 7f5eb1302a190e849a85253e3e9a3cc1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DiscoBase
+    second: {fileID: 2100000, guid: ba0286f70108c2847993195479686541, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DiscoMirror
+    second: {fileID: 2100000, guid: 961ee2b1b14fd5743a06fefad3f7f07a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
