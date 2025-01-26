@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: 62e9b82e8e1fed647878e03a78f6ed56
+guid: ea41a63cba8d7784899a4798ef611e1d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Mat_MoneyA
-    second: {fileID: 2100000, guid: 0016fb12b05a010498278c6321c2c55c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Mat_MoneyB
-    second: {fileID: 2100000, guid: 2948bfefdd18601409c4d334b42f2137, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Mat_MoneyC
-    second: {fileID: 2100000, guid: 0016fb12b05a010498278c6321c2c55c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Mat_MoneyD
-    second: {fileID: 2100000, guid: b047979f9fbd15f47b7d886f3ffc05a3, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
