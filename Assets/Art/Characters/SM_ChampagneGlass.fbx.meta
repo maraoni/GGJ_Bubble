@@ -3,7 +3,17 @@ guid: 5b5b719c883e72d4bb0413c72213ff7f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_ChampagneLiquid
+    second: {fileID: 2100000, guid: a09af7f47e845834c9a6dfef1e5d4c58, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_champagneGlass
+    second: {fileID: 2100000, guid: 8209cc18f6fc4da408a7dd9a31168ca7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

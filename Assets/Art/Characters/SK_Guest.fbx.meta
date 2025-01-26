@@ -3,7 +3,47 @@ guid: b16613c2dc500d341831a0bf3d0b64de
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_BlackGuest
+    second: {fileID: 2100000, guid: 29ce747a2dee1fd4b94537c129e34d05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_GuestHand
+    second: {fileID: 2100000, guid: 4e2c4f15fc6996e4290cfb715c3485e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_MoustacheGuest
+    second: {fileID: 2100000, guid: 8b414138fbaa815469d4bd16ca358148, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_ShoesGuest
+    second: {fileID: 2100000, guid: e010c49d85df80e4392cd23bbd643050, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_WhiteGuest
+    second: {fileID: 2100000, guid: 3b975d8847d8fd04eafcbff4c2431225, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_headGuest
+    second: {fileID: 2100000, guid: 4e2c4f15fc6996e4290cfb715c3485e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_pantsGuest
+    second: {fileID: 2100000, guid: bf00bcbb52b816349baa50f87cd63ddb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_tieGuest
+    second: {fileID: 2100000, guid: 63e941b4b195e1a45be31220fddc27d9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

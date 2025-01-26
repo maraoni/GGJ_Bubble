@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_BottleLabel
+  m_Name: M_
   m_Shader: {fileID: -6465566751694194690, guid: cf293ec583dbe394284b5306361c2350, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -56,14 +56,18 @@ Material:
     m_Ints: []
     m_Floats:
     - _Brightness: 1
-    - _Darkness: 0.5
-    - _Height: 0.5
+    - _Darkness: 0.36
+    - _GradientHeight: -0.43
+    - _GradientSmoothness: 1.75
+    - _Height: 0.409
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Shadow_Steps: 2
+    - _Smoothness: 0.697
     m_Colors:
-    - _Light: {r: 0.90188676, g: 0.7667402, b: 0.4203132, a: 0}
+    - _Highlight: {r: 1, g: 0.5211577, b: 0, a: 0}
+    - _Light: {r: 1, g: 1, b: 1, a: 0}
     - _Mid: {r: 1, g: 0.7003509, b: 0, a: 1}
-    - _Shadow: {r: 0.28235295, g: 0.1924456, b: 0.3882353, a: 1}
+    - _Shadow: {r: 0.5750016, g: 0.39940897, b: 0.78113204, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

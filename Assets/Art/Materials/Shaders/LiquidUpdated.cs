@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class LiquidUpdated : MonoBehaviour {
 	public enum UpdateMode { Normal, UnscaledTime }
 	public UpdateMode updateMode;
@@ -103,8 +102,8 @@ public class LiquidUpdated : MonoBehaviour {
 		}
 
 		// send it to the shader
-		rend.sharedMaterial.SetFloat("_WobbleX", wobbleAmountX);
-		rend.sharedMaterial.SetFloat("_WobbleZ", wobbleAmountZ);
+		rend.material.SetFloat("_WobbleX", wobbleAmountX);
+		rend.material.SetFloat("_WobbleZ", wobbleAmountZ);
 
 		// set fill amount
 		UpdatePos(deltaTime);
@@ -131,7 +130,7 @@ public class LiquidUpdated : MonoBehaviour {
 		else {
 			pos = worldPos - transform.position - new Vector3(0, fillAmount, 0);
 		}
-		rend.sharedMaterial.SetVector("_FillAmount", pos);
+		rend.material.SetVector("_FillAmount", pos);
 	}
 
 	//https://forum.unity.com/threads/manually-calculate-angular-velocity-of-gameobject.289462/#post-4302796
