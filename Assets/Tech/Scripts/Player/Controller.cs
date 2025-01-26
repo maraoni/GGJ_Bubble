@@ -81,6 +81,9 @@ public class Controller : MonoBehaviour
 
     public void ResetBottle()
     {
+        animator.SetFloat("X", 0);
+        animator.SetFloat("Y", 0);
+
         myBottle.SetFill(0);
         CurrentChampagneFill = MaxChampagneFill;
         Cork.SetActive(true);
