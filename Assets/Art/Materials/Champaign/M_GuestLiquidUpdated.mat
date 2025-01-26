@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Guest_Unlit_FX_LiquidUpdated
+  m_Name: M_GuestLiquidUpdated
   m_Shader: {fileID: 4800000, guid: d64508fcb44ab854cb6636ace972b43e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -31,13 +31,13 @@ Material:
     m_Floats:
     - _Amplitude: 0.15
     - _Freq: 3
-    - _Line: 0.02
+    - _Line: 0.06
     - _LineSmooth: 0
     - _RimPower: 7
     m_Colors:
-    - _FoamColor: {r: 1, g: 0.97267455, b: 0.35283017, a: 1}
+    - _FoamColor: {r: 0.9917183, g: 1, b: 0.5566037, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Tint: {r: 0.16376643, g: 0.19245279, b: 0.1695037, a: 1}
-    - _TopColor: {r: 0.28931156, g: 0.3735848, b: 0.24177279, a: 1}
+    - _Tint: {r: 1, g: 0.44848937, b: 0.109803915, a: 1}
+    - _TopColor: {r: 0.9622642, g: 0.84510887, b: 0.25236732, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

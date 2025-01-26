@@ -3,7 +3,17 @@ guid: 918496ac1930b4e4fadb92fef1207ee7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_WallWood
+    second: {fileID: 2100000, guid: 9c2241cc517fbbe439022c8044715a1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Wallpaper
+    second: {fileID: 2100000, guid: f568713b8100b3d40aadcc97c5a74ab1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
