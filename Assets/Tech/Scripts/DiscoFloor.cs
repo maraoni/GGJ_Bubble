@@ -11,8 +11,16 @@ public class DiscoFloor : MonoBehaviour
 
     float timer = 0;
 
+    [SerializeField] bool ShouldRotate = false;
+
     void Update()
     {
+
+        if (ShouldRotate)
+        {
+            transform.Rotate(Vector3.up * 35 * Time.deltaTime);
+        }
+
         if (timer > InBetweener)
         {
             if(stage)

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 4.2
-  m_fontSizeMax: 22
+  m_fontSizeMax: 24
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -170,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1050006236054247373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -301,8 +301,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8594da02a71f57f4f96b0e3fd3e1bd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Levels: []
-  LevelDescriptions: []
+  Levels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  LevelDescriptions:
+  - The guests have arrived, serve them their bubbly before it runs out. We don't
+    have many bottles so DON'T SPILL
+  - The guests are satisfied with their service. The night continues
+  - The guests sure like the bubbly, it's time to step it up
+  - The guests cannot get enough  bubbly. Let the disco begin.  SERVE THEM MORE
+  - The guests are all served, but the economy seem to be tanking...      More bubbly?
   mainCamera: {fileID: 0}
   Guest: {fileID: 1955238252969826664, guid: 567c8edc0c0f3084fa3788b05ed0fe44, type: 3}
   GuestSpawn: {fileID: 0}
@@ -1862,6 +1873,7 @@ Transform:
   - {fileID: 5147946979976346690}
   - {fileID: 3349379868789727327}
   - {fileID: 4216597577901743805}
+  - {fileID: 4250265453080242111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5431508908839813163
@@ -1879,3 +1891,69 @@ MonoBehaviour:
   states: []
   CurrentState: {fileID: 0}
   DialogueMachineText: {fileID: 6331300395187987275}
+--- !u!1001 &767832271842014443
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7157330773822295139}
+    m_Modifications:
+    - target: {fileID: 3347166373570688733, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_Volume
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.611442
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 29.39236
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -52.179073
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528458553494104157, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+--- !u!4 &4250265453080242111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3484689396816352084, guid: 3be63f7abcc899145969870ce3742a29, type: 3}
+  m_PrefabInstance: {fileID: 767832271842014443}
+  m_PrefabAsset: {fileID: 0}

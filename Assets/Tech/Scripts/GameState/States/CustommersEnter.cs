@@ -23,10 +23,16 @@ public class CustommersEnter : State
     {
         CurrentLevel = 0;
     }
+
+    public int GetLevel()
+    {
+        return CurrentLevel;
+    }
     public override void OnEnter()
     {
         base.OnEnter();
-        
+
+        SoundManager.Instance.PlaySong(SoundManager.Songs.CustommersEnter);
 
         if (CurrentLevel + 1 > Levels.Count)
         {
@@ -80,6 +86,7 @@ public class CustommersEnter : State
             TransitionImage.color = Color.Lerp(Color.black, Color.clear, t);
             yield return null;
         }
+        SoundManager.Instance.StopSong();
 
         s.PlayCorkAnimation();
 

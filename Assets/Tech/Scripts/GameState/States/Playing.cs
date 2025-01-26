@@ -23,6 +23,21 @@ public class Playing : State
         base.OnEnter();
         CameraController.Instance.ClearFocusPoint();
 
+        CustommersEnter s = GamesManager.Instance.GetState<CustommersEnter>() as CustommersEnter;
+        s.GetLevel();
+        if (s.GetLevel() == 4)
+        {
+            SoundManager.Instance.PlaySong(SoundManager.Songs.Disco);
+        }
+        else if (s.GetLevel() == 5)
+        {
+            SoundManager.Instance.StopSong();
+        }
+        else
+        {
+            SoundManager.Instance.PlaySong(SoundManager.Songs.Playing);
+        }
+
 
         playingUI?.SetActive(true);
         mainCamera.SetActive(true);
@@ -40,29 +55,31 @@ public class Playing : State
     {
         base.OnUpdate();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GamesManager.Instance.SwitchState<Outro>();
+            GamesManager.Instance.SwitchState<MainMenu>();
             return;
         }
 
-
         controller.UpdatePlayer();
 
-        bool allAreSatisfied = true;
-
-        foreach (Guest g in guests)
+        if (guests.Count > 0)
         {
-            g.UpdateGuest();
-            if(!g.IsSatisfied)
+            bool allAreSatisfied = true;
+
+            foreach (Guest g in guests)
             {
-                allAreSatisfied = false;
+                g.UpdateGuest();
+                if (!g.IsSatisfied)
+                {
+                    allAreSatisfied = false;
+                }
             }
-        }
 
-        if(allAreSatisfied)
-        {
-            GamesManager.Instance.SwitchState<CustommersEnter>();
+            if (allAreSatisfied)
+            {
+                GamesManager.Instance.SwitchState<CustommersEnter>();
+            }
         }
     }
     public override void OnLateUpdate()
@@ -85,6 +102,7 @@ public class Playing : State
     public override void OnExit()
     {
         base.OnExit();
+        guests.Clear();
         mainCamera.SetActive(false);
         playingUI.SetActive(false);
     }

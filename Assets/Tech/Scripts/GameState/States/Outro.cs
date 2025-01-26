@@ -21,6 +21,8 @@ public class Outro : State
         OutroObject.SetActive(true);
         MainMenuButton.SetActive(false);
 
+        SoundManager.Instance.PlaySong(SoundManager.Songs.Outro);
+
         UpperText.DisplayText("", false);
         LowerText.DisplayText("", false);
         StartCoroutine(ExitSequence());
@@ -48,9 +50,9 @@ public class Outro : State
         yield return new WaitForSeconds(5);
         UpperText.DisplayText("And so it was that after a long night of mingling with plenty of bubbly", false);
         yield return new WaitForSeconds(4);
-        LowerText.DisplayText("That all of the guests, buzzed and satisfied, had their economic bubble pop", false);
+        LowerText.DisplayText("That all of the guests completly buzzed up, suddenly had their economic bubble pop", false);
         yield return new WaitForSeconds(6);
-        UpperText.DisplayText("It matters not for you bubba the tips now makes you the richest in the room", false);
+        UpperText.DisplayText("It matters not for you Bubba, the tips now makes you the richest in the room", false);
         yield return new WaitForSeconds(4);
         LowerText.DisplayText("And it was worth every drop", false);
         yield return new WaitForSeconds(4);

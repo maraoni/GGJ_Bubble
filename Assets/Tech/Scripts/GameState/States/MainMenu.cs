@@ -14,6 +14,8 @@ public class MainMenu : State
         MainUI.SetActive(true);
         MainMenuCamera.SetActive(true);
 
+        SoundManager.Instance.PlaySong(SoundManager.Songs.MainMenu);
+
         TransitionImage.color = Color.clear;
         CustommersEnter s = GamesManager.Instance.GetState<CustommersEnter>() as CustommersEnter;
 
@@ -44,6 +46,11 @@ public class MainMenu : State
             hasStarted = true;
             StartCoroutine(StartingGame());
         }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     public IEnumerator StartingGame()

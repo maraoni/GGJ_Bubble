@@ -11,6 +11,7 @@ public class LoseState : State
     [SerializeField] GameObject LoseCamera;
     public override void OnEnter()
     {
+        SoundManager.Instance.PlaySong(SoundManager.Songs.Lost);
         MainMenuButton.SetActive(false);
         LoseCamera.SetActive(true);
         LoseUI.gameObject.SetActive(true);

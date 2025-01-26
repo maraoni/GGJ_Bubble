@@ -10,6 +10,10 @@ public class Glass : MonoBehaviour
 
     Color startColor = Color.white;
     [SerializeField] LiquidUpdated myLiquidUpdated;
+    [SerializeField] AudioSource myPourLiquid;
+
+    float KeepLiquidSound = 0;
+    const float nextLiquid = 0.15f;
     private void Start()
     {
         renderers = GetComponentsInChildren<MeshRenderer>();
@@ -25,9 +29,23 @@ public class Glass : MonoBehaviour
     {
         float fill = Mathf.Lerp(1, 0, FillAmount);
         myLiquidUpdated.SetFill(fill);
+
+        if (KeepLiquidSound > 0)
+        {
+            KeepLiquidSound -= Time.deltaTime;
+        }
+        else
+        {
+            myPourLiquid.Stop();
+        }
     }
     private void OnParticleCollision(GameObject other)
     {
+        if (!myPourLiquid.isPlaying)
+        {
+            myPourLiquid.Play();
+        }
+        KeepLiquidSound = nextLiquid;
         FillAmount += Time.deltaTime * 0.35f;
     }
 }

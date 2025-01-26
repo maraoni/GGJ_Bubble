@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -19,7 +20,9 @@ public class SoundManager : MonoBehaviour
         MainMenu,
         CustommersEnter,
         Playing,
-        Outro
+        Outro,
+        Disco,
+        Lost
     }
 
     [SerializeField] AudioSource MainTrack;
@@ -28,22 +31,39 @@ public class SoundManager : MonoBehaviour
     public class SongPair
     {
         public Songs mySong;
-        public AudioSource mySource;
+        public AudioClip mySource;
     }
 
     [SerializeField] List<SongPair> songs = new();
 
+    [SerializeField] Slider myVolumeSlider;
+
+    private void Start()
+    {
+        myVolumeSlider.onValueChanged.AddListener(delegate { AdjustVolume(); });
+    }
+
     public void PlaySong(Songs aSong)
     {
-        foreach(SongPair s in songs)
+        foreach (SongPair s in songs)
         {
-            if(s.mySong == aSong)
+            if (s.mySong == aSong)
             {
                 MainTrack.Stop();
-                MainTrack = s.mySource;
+                MainTrack.clip = s.mySource;
                 MainTrack.Play();
                 return;
             }
         }
+    }
+
+    public void AdjustVolume()
+    {
+        AudioListener.volume = myVolumeSlider.value;
+    }
+
+    public void StopSong()
+    {
+        MainTrack.Stop();
     }
 }

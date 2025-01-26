@@ -17,6 +17,8 @@ public class Controller : MonoBehaviour
 
     [SerializeField] LiquidUpdated myBottle;
 
+    [SerializeField] AudioSource CorkPop;
+
     private void Start()
     {
         controller = GetComponent<Rigidbody>();
@@ -95,7 +97,7 @@ public class Controller : MonoBehaviour
         Cork.SetActive(true);
         ChampagneEffect.SetActive(false);
         yield return new WaitForSeconds(1);
-
+        CorkPop.Play();
         Cork.SetActive(false);
         ChampagneEffect.SetActive(true);
 
