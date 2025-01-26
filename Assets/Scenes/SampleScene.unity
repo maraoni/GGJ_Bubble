@@ -13469,6 +13469,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1638119594}
+    - target: {fileID: 3062534548368920058, guid: 6bc43e6b409808b499e84f1504f7e405, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 7157330773822295139, guid: 6bc43e6b409808b499e84f1504f7e405, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
